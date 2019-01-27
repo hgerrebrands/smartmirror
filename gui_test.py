@@ -27,9 +27,10 @@ def do_stuff():
     l.config(text=s)
     root.after(100, do_stuff)
 def showTemperature():
-        s1 = text="Temperature: %s"%HTU21D(1).read_temperature()
-        temp.config(text=s1)
-        root.after(100, showTemperature)
+    temperature = HTU21D(1).read_temperature()
+    s1 = text="Temperature: %s"%temperature
+    temp.config(text=s1)
+    root.after(100, showTemperature)
       
 root=tk.Tk()
 root.wm_overrideredirect(True)
