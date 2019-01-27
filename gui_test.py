@@ -1,5 +1,6 @@
 import tkinter as tk
-import pytz, datetime, sht21
+import pytz, datetime
+from HTU21D import HTU21D
 from guizero import Text 
 from random import seed, choice
 from string import ascii_letters
@@ -26,12 +27,9 @@ def do_stuff():
     l.config(text=s)
     root.after(100, do_stuff)
 def showTemperature():
-    with sht21.SHT21(0) as sht21:
-        s1 = text="Temperature: %s"%sht21.read_temperature()
+        s1 = text="Temperature: %s"%HTU21D(1).read_temperature()
         temp.config(text=s1)
         root.after(100, showTemperature)
-        #print "Temperatures"%sht21.read_temperature()
-        #print "Humidity: %s"%sht21.read_humidity()
       
 root=tk.Tk()
 root.wm_overrideredirect(True)
