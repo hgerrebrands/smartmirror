@@ -1,6 +1,6 @@
 import tkinter as tk
 import pytz, datetime
-from HTU21D import HTU21D
+from htu21d import HTU21D
 from guizero import Text 
 from random import seed, choice
 from string import ascii_letters
@@ -27,7 +27,9 @@ def do_stuff():
     l.config(text=s)
     root.after(100, do_stuff)
 def showTemperature():
-    temperature = HTU21D(1).read_temperature()
+    sensor = HTU21D()
+    sensor.reset()
+    temperature = sensor.get_temp()
     s1 = text="Temperature: %s"%temperature
     temp.config(text=s1)
     root.after(100, showTemperature)
