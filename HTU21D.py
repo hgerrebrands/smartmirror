@@ -38,10 +38,11 @@ class HTU21D:
     }
 
     def __init__(self, debug=False):
+    
         self.bus = i2c.I2CMaster(1)
         self.resolutions = self.get_resolutions()
         self.rh_timing, self.temp_timing = self.MEASURE_TIMES[self.resolutions]
-        self.debug = debug
+        self.debug = False
         
     def check_crc(self, sensor_val):
         """
