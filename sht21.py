@@ -135,8 +135,8 @@ class SHT21Test(unittest.TestCase):
 if __name__ == "__main__":
     try:
         with SHT21(0) as sht21:
-            print "Temperature: %s" % sht21.read_temperature()
-            print "Humidity: %s" % sht21.read_humidity()
+            #print "Temperature: %s" % sht21.read_temperature()
+            #print "Humidity: %s" % sht21.read_humidity()
     except IOError, e:
         print e
         print "Error creating connection to i2c.  This must be run as root"
