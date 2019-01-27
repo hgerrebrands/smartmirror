@@ -38,7 +38,7 @@ class HTU21D:
     }
 
     def __init__(self, debug=False):
-        self.bus = i2c.I2CMaster()
+        self.bus = i2c.I2CMaster(1)
         self.resolutions = self.get_resolutions()
         self.rh_timing, self.temp_timing = self.MEASURE_TIMES[self.resolutions]
         self.debug = debug
@@ -119,6 +119,6 @@ class HTU21D:
 
 
 if __name__ == '__main__':
-    sensor = HTU21D(1)
+    sensor = HTU21D()
     sensor.reset()
     print(time.time(), sensor.get_temp(), sensor.get_rel_humidity())

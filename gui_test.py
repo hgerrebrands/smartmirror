@@ -27,10 +27,10 @@ def do_stuff():
     l.config(text=s)
     root.after(100, do_stuff)
 def showTemperature():
-    sensor = HTU21D(1)
+    sensor = HTU21D()
     sensor.reset()
     temperature = sensor.get_temp()
-    s1 = text="Temperature: %s"%temperature
+    s1 = text="Temperature: %.1f"%temperature
     temp.config(text=s1)
     root.after(100, showTemperature)
       
