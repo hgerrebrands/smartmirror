@@ -131,12 +131,3 @@ class SHT21Test(unittest.TestCase):
         """Unit test to check the checksum method.  Uses values read"""
         self.failUnless(SHT21._calculate_checksum([chr(99), chr(172)], 2) == 249)
         self.failUnless(SHT21._calculate_checksum([chr(99), chr(160)], 2) == 132)
-
-if __name__ == "__main__":
-    try:
-        with SHT21(0) as sht21:
-            #print "Temperature: %s" % sht21.read_temperature()
-            #print "Humidity: %s" % sht21.read_humidity()
-    except IOError, e:
-        print e
-        print "Error creating connection to i2c.  This must be run as root"
