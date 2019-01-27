@@ -1,5 +1,5 @@
 import tkinter as tk
-import pytz, datetime
+import pytz, datetime, sht21
 from guizero import Text 
 from random import seed, choice
 from string import ascii_letters
@@ -14,7 +14,7 @@ class FullScreenApp(object):
         self._geom='200x200+0+0'
         master.geometry("{0}x{1}+0+0".format(
             master.winfo_screenwidth(), master.winfo_screenheight()-pad))
-        master.bind('<Escape>',self.toggle_geom)            
+        master.bind('<Escape>',self.toggle_geom)
     def toggle_geom(self,event):
         geom=self.master.winfo_geometry()
         print(geom,self._geom)
@@ -25,6 +25,13 @@ def do_stuff():
     s = text=datetime.datetime.now(pytz.timezone ("Europe/Amsterdam")).strftime("%d-%m-%y    %H:%M:%S")
     l.config(text=s)
     root.after(100, do_stuff)
+def showTemperature():
+    with sht21.SHT21(0) as sht21:
+        s1 = text="Temperature: %s"%sht21.read_temperature()
+        temp.config(text=s1)
+        root.after(100, showTemperature)
+        #print "Temperatures"%sht21.read_temperature()
+        #print "Humidity: %s"%sht21.read_humidity()
       
 root=tk.Tk()
 root.wm_overrideredirect(True)
@@ -34,9 +41,12 @@ root.bind("<Button-1>", lambda evt: root.destroy())
 l = tk.Label('', font=("Helvetica", 60), fg='white', bg='black')
 l.pack(expand=True)
 
+temp = tk.Label('', font=("Helvetica", 60), fg='white', bg='black')
+temp.pack(expand=True)
 
 root.configure(background='black')
 
 app=FullScreenApp(root)
 do_stuff()
+showTemperature()
 root.mainloop()
