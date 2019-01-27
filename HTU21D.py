@@ -119,6 +119,6 @@ class HTU21D:
 
 
 if __name__ == '__main__':
-    sensor = HTU21D()
+    sensor = HTU21D(1)
     sensor.reset()
     print(time.time(), sensor.get_temp(), sensor.get_rel_humidity())
